@@ -6,7 +6,23 @@ import java.util.Date;
 
 public class Order {
 
-    private Timestamp id;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(ArrayList<Cart> cart) {
+        this.cart = cart;
+    }
 
     private Date date;
 
@@ -14,13 +30,6 @@ public class Order {
     private ArrayList<Cart> cart;
 
 
-    public Timestamp getId() {
-        return id;
-    }
-
-    public void setId(Timestamp id) {
-        this.id = id;
-    }
 
     public Date getDate() {
         return date;

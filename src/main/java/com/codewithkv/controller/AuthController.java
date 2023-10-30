@@ -18,6 +18,7 @@ import java.util.Scanner;
 import static com.codewithkv.Utils.AppInput.enterInt;
 import static com.codewithkv.Utils.AppInput.enterString;
 import static com.codewithkv.Utils.FileUtil.getCredentialsFile;
+import static com.codewithkv.Utils.UserUtils.setLoggedInUser;
 import static com.codewithkv.Utils.Utils.println;
 
 
@@ -34,7 +35,7 @@ public class AuthController implements IAuthController {
 
     public AuthController(AppController appController) {
         this.appController = appController;
-        homeController = new HomeController();
+        homeController = new HomeController(this);
 
         loginPage = new LoginPage();
 
@@ -74,6 +75,7 @@ public class AuthController implements IAuthController {
         password = enterString(StringUtil.ENTER_PASSWORD);
         User user = validateUser(email, password);
         if (user != null) {
+            setLoggedInUser(user);
             homeController.printMenu();
         } else {
             loginPage.printInvalidCredentials();
@@ -89,14 +91,17 @@ public class AuthController implements IAuthController {
             while (scanner.hasNext())
             {
                 String[] value = scanner.next().split(",");
+
                 if(!value[0].equals("id"))
                 {
                     if(value[2].equals(email) && value[3].equals(password)){
+
                         User user=new User();
                         user.setId(Integer.parseInt(value[0]));
                         user.setName(value[1]);
                         user.setEmail(value[2]);
                         user.getPassword(value[3]);
+                        System.out.println(user);
                         if(user.getEmail().equals("admin@gmail.com")){
                             user.setRole(Role.ADMIN);
                         }
@@ -104,22 +109,13 @@ public class AuthController implements IAuthController {
                             user.setRole(Role.USER);
                         }
                         return user;
-
                     }
-
-
-
                 }
-                System.out.println(value);
             }
-
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        User user = new User();
-
-        return user;
+        return null;
     }
 
     @Override

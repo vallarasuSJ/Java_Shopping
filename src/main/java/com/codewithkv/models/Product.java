@@ -17,6 +17,16 @@ public class Product {
 
     private int stocks;
 
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public int getId() {
         return id;
     }

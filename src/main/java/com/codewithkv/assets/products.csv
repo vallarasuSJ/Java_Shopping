@@ -1,0 +1,5 @@
+id,title,description,price,stock,category,categoryId
+1,Tshirt,Tshirt,100,10,dressCategory,1
+2,shirt,shirt,2000,10,dressCategory,1
+3,redmi,redmi,1200,10,mobileCategory,2
+4,samsung,samsung,1000,10,mobileCategory,2
